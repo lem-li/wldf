@@ -7,7 +7,12 @@ $(document).ready(function() {
 
         $.post("/wldf/do-read", {sn: sn, bid:bid, uid:uid}, function (result) {
             var str = '<section class="read-section jsChapterWrapper"><h3>'+result.section+'</h3><p>'+result.detail+'</p></section>';
-            $("#chapterContent").append(str);
+            if(next == 1){
+                $("#chapterContent").append(str);
+            }else {
+                $("#chapterContent").prepend(str);
+            }
+
             $("#sn").val(result.sn);
         },'json');
 
