@@ -1,0 +1,29 @@
+{
+    "name": "miffy/miffyzq",
+    "description": "backend theme asset bundle for Yii 2.0 Framework;基于H+的后台模板第一版",
+    "type": "yii2-extension",
+    "version":"1.0.12",
+    "require": {
+        "yiisoft/yii2": "^2.0",
+        "yiisoft/yii2-bootstrap": "^2.0",
+        "rmrevin/yii2-fontawesome": "^2.17"
+    },
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "miffy",
+            "email": "zuoqiang320@126.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "miffy\\miffyzq\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.4-dev"
+        }
+    }
+}
