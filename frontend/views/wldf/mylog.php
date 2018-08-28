@@ -41,8 +41,36 @@
     </content>
 
 
+
+<footer class="read-opt-footer" data-l1="2" style="display: none">
+    <div class="btn-group">
+        <a href="#&amp;asideChapter" id="readBtnChapter" class="btn-group-cell" data-rel="asideChapter" data-eid="mqd_R10" role="button" aria-haspopup="true">
+            <svg class="icon icon-catalog"><use xlink:href="#icon-catalog"></use></svg>
+            <h4 class="read-opt-footer-h">目录</h4>
+        </a>
+        <a href="javascript:" id="readBtnProg" class="btn-group-cell jsLayerTrigger" data-rel="readOptProg" data-eid="mqd_R11" role="menuitem">
+            <svg class="icon icon-progress"><use xlink:href="#icon-progress"></use></svg>
+            <svg class="icon icon-progress-on"><use xlink:href="#icon-progress-on"></use></svg>
+            <h4 class="read-opt-footer-h">进度</h4>
+        </a>
+        <a href="javascript:" id="readBtnSet" class="btn-group-cell jsLayerTrigger" data-rel="readOptSet" data-eid="mqd_R14" role="menuitem">
+            <svg class="icon icon-font-set"><use xlink:href="#icon-font-set"></use></svg>
+            <svg class="icon icon-font-set-on"><use xlink:href="#icon-font-set-on"></use></svg>
+            <h4 class="read-opt-footer-h">设置</h4>
+        </a>
+
+        <a href="javascript:" id="readBtnMode" class="btn-group-cell" data-mode="night" role="checkbox" title="日间夜间模式切换">
+            <svg class="icon icon-day" data-eid="mqd_R29"><use xlink:href="#icon-day"></use></svg>
+            <svg class="icon icon-night" data-eid="mqd_R30"><use xlink:href="#icon-night"></use></svg>
+            <h4 class="read-opt-footer-h">夜间</h4>
+        </a>
+        <a href="/book/1010980743/forum" class="btn-group-cell" data-eid="mqd_R31">
+            <svg class="icon icon-comment" aria-hidden="true"><use xlink:href="#icon-comment"></use></svg>
+            <h4 class="read-opt-footer-h">评论</h4>
+        </a>
+    </div>
+</footer>
+
 </div>
-
-
 </body>
 </html>

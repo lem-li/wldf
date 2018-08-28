@@ -18,5 +18,24 @@ $(document).ready(function() {
 
     });
 
+    $("content").click(function(){
+        $("footer").toggle();
+    });
+    $("#readBtnMode").click(function () {
+        if($(this).find("h4").text() == '夜间'){
+            $("body").css({"background-color":"black"});
+            $(".page-read, .page-read-cover").css({"color":"#f6f7f9"});
+            $(this).find("h4").text("日间");
+            $(this).find(".icon-day").show();
+            $(this).find(".icon-night").hide();
+        }else {
+            $("body").css({"background-color":"#c4b395"});
+            $(".page-read, .page-read-cover").css({"color":"black"});
+            $(this).find("h4").text("夜间");
+            $(this).find(".icon-day").hide();
+            $(this).find(".icon-night").show();
+        }
+
+    });
 
 });
