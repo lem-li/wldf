@@ -29,7 +29,7 @@
         <div id="readLoadPrev" class="read-load-prev">
             <a class="read-load-icon btn-any loading"></a>
         </div>
-        <span class="cc_test" data-value="-1">上一章</span>
+        <span class="cc_test" data-value="-1" style="display: block;text-align: center;">上一章</span>
         <article id="chapterContent" class="read-article" style="font-size: 1.125rem" data-eids="mqd_R34|mqd_R35">
             <section class="" >
                 <h3><?php echo $detail['section']?></h3>
@@ -37,10 +37,56 @@
 
             </section>
         </article>
-        <span class="cc_test" data-value="1">下一章</span>
+        <span class="cc_test" data-value="1" style="display: block;margin-bottom: 20px;text-align: center;">下一章</span>
     </content>
 
-
+<div id="readOptSet" class="read-opt-bot read-opt-set" data-l1="2">
+    <div class="read-set-font">
+        <a href="javascript:" id="readFontDown" class="read-font-down" data-index="0" role="button">
+            <svg class="icon icon-size-down"><use xlink:href="#icon-size-down"></use></svg>
+            <aria>字号变小</aria>
+        </a>
+        <a href="javascript:" id="readFontUp" class="read-font-up" data-index="1" role="button">
+            <svg class="icon icon-size-up"><use xlink:href="#icon-size-up"></use></svg>
+            <aria>字号变大</aria>
+        </a>
+        <div class="read-font-bar">
+            <div class="range" style="width: 279px;"><div class="range-track" style="border-left-width: 79.7143px;"><a class="range-thumb" role="slider" aria-valuenow="3" aria-valuemax="8" aria-valuemin="1"></a></div></div><input type="range" id="readFontRange" name="font-size" min="1" max="8" value="3" data-eids="mqd_R15|mqd_R16|mqd_R17|mqd_R18|mqd_R19|mqd_R20|mqd_R21|mqd_R22">
+        </div>
+    </div>
+    <div id="readSetSkin" class="read-set-skin">
+        <ul class="btn-group" role="radiogroup">
+            <li class="btn-group-cell read-set-cell">
+                <input type="radio" id="skinDefault" name="skin" value="default" checked="" data-index="0" data-eid="mqd_R23" title="默认皮肤">
+                <label class="read-skin-default" for="skinDefault" title="默认皮肤"><svg class="icon icon-ok center"><use xlink:href="#icon-ok"></use></svg></label>
+            </li>
+            <li class="btn-group-cell read-set-cell">
+                <input type="radio" id="skinBlue" name="skin" value="blue" data-index="1" data-eid="mqd_R24" title="蓝色皮肤">
+                <label class="read-skin-blue" for="skinBlue" title="蓝色皮肤"><svg class="icon icon-ok center"><use xlink:href="#icon-ok"></use></svg></label>
+            </li>
+            <li class="btn-group-cell read-set-cell">
+                <input type="radio" id="skinGreen" name="skin" value="green" data-index="2" data-eid="mqd_R25" title="绿色皮肤">
+                <label class="read-skin-green" for="skinGreen" title="绿色皮肤"><svg class="icon icon-ok center"><use xlink:href="#icon-ok"></use></svg></label>
+            </li>
+            <li class="btn-group-cell read-set-cell">
+                <input type="radio" id="skinLight" name="skin" value="light" data-index="3" data-eid="mqd_R26" title="浅色皮肤">
+                <label class="read-skin-light" for="skinLight" title="浅色皮肤"><svg class="icon icon-ok center"><use xlink:href="#icon-ok"></use></svg></label>
+            </li>
+        </ul>
+    </div>
+    <div id="readSetLayout" class="read-set-layout">
+        <ul class="btn-group">
+            <li class="btn-group-cell read-set-cell">
+                <input type="radio" id="layoutV" name="layout" value="v" checked="" data-eid="mqd_R28">
+                <label class="read-btn-layout" for="layoutV">上下滑动</label>
+            </li>
+            <li class="btn-group-cell read-set-cell">
+                <input type="radio" id="layoutH" name="layout" value="h" data-eid="mqd_R27">
+                <label class="read-btn-layout" for="layoutH">左右滑动</label>
+            </li>
+        </ul>
+    </div>
+</div>
 
 <footer class="read-opt-footer" data-l1="2" style="display: none">
     <div class="btn-group">
@@ -63,10 +109,6 @@
             <svg class="icon icon-day" data-eid="mqd_R29"><use xlink:href="#icon-day"></use></svg>
             <svg class="icon icon-night" data-eid="mqd_R30"><use xlink:href="#icon-night"></use></svg>
             <h4 class="read-opt-footer-h">夜间</h4>
-        </a>
-        <a href="/book/1010980743/forum" class="btn-group-cell" data-eid="mqd_R31">
-            <svg class="icon icon-comment" aria-hidden="true"><use xlink:href="#icon-comment"></use></svg>
-            <h4 class="read-opt-footer-h">评论</h4>
         </a>
     </div>
 </footer>
