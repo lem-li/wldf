@@ -11,6 +11,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js" ></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js" ></script>
     <script type="text/javascript" src="/js/book.js" ></script>
     <link rel="stylesheet" data-ignore="true" href="/css/sprite.8d3e7.css">
 </head>
@@ -49,6 +50,19 @@
         <a href="javascript:" id="readFontUp" class="read-font-up" data-index="1" role="button">
             <svg class="icon icon-size-up"><use xlink:href="#icon-size-up"></use></svg>
             <aria>字号变大</aria>
+        </a>
+        <div class="read-font-bar">
+            <div class="range" style="width: 279px;"><div class="range-track" style="border-left-width: 79.7143px;"><a class="range-thumb" role="slider" aria-valuenow="3" aria-valuemax="8" aria-valuemin="1"></a></div></div><input type="range" id="readFontRange" name="font-size" min="1" max="8" value="3" data-eids="mqd_R15|mqd_R16|mqd_R17|mqd_R18|mqd_R19|mqd_R20|mqd_R21|mqd_R22">
+        </div>
+    </div>
+    <div class="read-set-font-opacity">
+        <a href="javascript:" id="readOpacityDown" class="read-font-down" data-index="0" role="button">
+            <svg class="icon icon-size-down"><use xlink:href="#icon-size-down"></use></svg>
+            <aria>亮度变小</aria>
+        </a>
+        <a href="javascript:" id="readOpacityUp" class="read-font-up" data-index="1" role="button">
+            <svg class="icon icon-size-up"><use xlink:href="#icon-size-up"></use></svg>
+            <aria>亮度变大</aria>
         </a>
         <div class="read-font-bar">
             <div class="range" style="width: 279px;"><div class="range-track" style="border-left-width: 79.7143px;"><a class="range-thumb" role="slider" aria-valuenow="3" aria-valuemax="8" aria-valuemin="1"></a></div></div><input type="range" id="readFontRange" name="font-size" min="1" max="8" value="3" data-eids="mqd_R15|mqd_R16|mqd_R17|mqd_R18|mqd_R19|mqd_R20|mqd_R21|mqd_R22">

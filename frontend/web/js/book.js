@@ -1,4 +1,22 @@
 $(document).ready(function() {
+    skin = [
+        "#c3b397",
+        "#cad9e7",
+        "#d2ecd2",
+        "#e6e6e6"
+    ];
+    ckskin = $.cookie('local-skin');
+    if(ckskin){
+        var skskinArr = ckskin.split('-');
+        $("body").css({"background-color":skskinArr[1]});
+        $("#readSetSkin").find("li").each(function () {
+            $(this).find(".read-skin-light").css({"color": ""})
+            if($(this).find("input").attr('data-index') == skskinArr[0]){
+                $(this).find("label").find("svg").css({"color": "#ed424b"})
+            }
+
+        });
+    }
     $(".cc_test").click(function(){
         var next = $(this).attr('data-value');
         var sn = parseInt($("#sn").val()) + parseInt(next);
@@ -28,13 +46,13 @@ $(document).ready(function() {
     $("#readBtnMode").click(function () {
         if($(this).find("h4").text() == '夜间'){
             $("body").css({"background-color":"black"});
-            $(".page-read, .page-read-cover").css({"color":"#faf9f9"});
+            $(".page-read, .page-read-cover").css({"color":"#faf9f9","opacity":"0.3"});
             $(this).find("h4").text("日间");
             $(this).find(".icon-day").show();
             $(this).find(".icon-night").hide();
         }else {
             $("body").css({"background-color":"#c4b395"});
-            $(".page-read, .page-read-cover").css({"color":"black"});
+            $(".page-read, .page-read-cover").css({"color":"black","opacity":"0.8"});
             $(this).find("h4").text("夜间");
             $(this).find(".icon-day").hide();
             $(this).find(".icon-night").show();
@@ -77,16 +95,15 @@ $(document).ready(function() {
         $(".range-track").css({"border-left-width":w+unit});
     });
 
-    skin = [
-        "#c3b397",
-        "#cad9e7",
-        "#d2ecd2",
-        "#e6e6e6"
-    ];
     $("#readSetSkin .btn-group-cell").click(function () {
-        // alert(skin[0]);
+        $.cookie('local-skin',$(this).find("input").attr('data-index') + '-' + skin[$(this).find("input").attr('data-index')],{ expires: 30, path: '/' });
         $("body").css({"background-color":skin[$(this).find("input").attr('data-index')]});
-        // alert($(this).find("input").attr('data-index'));
     });
 
+    $(".read-set-font-opacity").click(function () {
+
+    });
+    $("#readOpacityDown").click(function () {
+
+    });
 });
