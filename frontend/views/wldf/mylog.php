@@ -55,19 +55,6 @@
             <div class="range" style="width: 279px;"><div class="range-track" style="border-left-width: 79.7143px;"><a class="range-thumb" role="slider" aria-valuenow="3" aria-valuemax="8" aria-valuemin="1"></a></div></div><input type="range" id="readFontRange" name="font-size" min="1" max="8" value="3" data-eids="mqd_R15|mqd_R16|mqd_R17|mqd_R18|mqd_R19|mqd_R20|mqd_R21|mqd_R22">
         </div>
     </div>
-    <div class="read-set-font-opacity">
-        <a href="javascript:" id="readOpacityDown" class="read-font-down" data-index="0" role="button">
-            <svg class="icon icon-size-down"><use xlink:href="#icon-size-down"></use></svg>
-            <aria>亮度变小</aria>
-        </a>
-        <a href="javascript:" id="readOpacityUp" class="read-font-up" data-index="1" role="button">
-            <svg class="icon icon-size-up"><use xlink:href="#icon-size-up"></use></svg>
-            <aria>亮度变大</aria>
-        </a>
-        <div class="read-font-bar">
-            <div class="range" style="width: 279px;"><div class="range-track" style="border-left-width: 79.7143px;"><a class="range-thumb" role="slider" aria-valuenow="3" aria-valuemax="8" aria-valuemin="1"></a></div></div><input type="range" id="readFontRange" name="font-size" min="1" max="8" value="3" data-eids="mqd_R15|mqd_R16|mqd_R17|mqd_R18|mqd_R19|mqd_R20|mqd_R21|mqd_R22">
-        </div>
-    </div>
     <div id="readSetSkin" class="read-set-skin">
         <ul class="btn-group" role="radiogroup">
             <li class="btn-group-cell read-set-cell">
@@ -92,11 +79,11 @@
         <ul class="btn-group">
             <li class="btn-group-cell read-set-cell">
                 <input type="radio" id="layoutV" name="layout" value="v" checked="" data-eid="mqd_R28">
-                <label class="read-btn-layout" for="layoutV">上下滑动</label>
+                <label class="read-btn-layout" for="layoutV">亮度减小</label>
             </li>
             <li class="btn-group-cell read-set-cell">
                 <input type="radio" id="layoutH" name="layout" value="h" data-eid="mqd_R27">
-                <label class="read-btn-layout" for="layoutH">左右滑动</label>
+                <label class="read-btn-layout" for="layoutH">亮度增大</label>
             </li>
         </ul>
     </div>

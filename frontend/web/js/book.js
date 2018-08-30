@@ -99,7 +99,16 @@ $(document).ready(function() {
         $.cookie('local-skin',$(this).find("input").attr('data-index') + '-' + skin[$(this).find("input").attr('data-index')],{ expires: 30, path: '/' });
         $("body").css({"background-color":skin[$(this).find("input").attr('data-index')]});
     });
-
+    $("#readSetLayout li").click(function () {
+        if($(this).find('input').attr('data-eid') == 'mqd_R28'){
+            // $(".page-read, .page-read-cover").css("opacity");
+            var opacity = parseFloat($(".page-read, .page-read-cover").css("opacity")) - parseFloat('0.1');
+            $(".page-read, .page-read-cover").css("opacity",opacity);
+        }else{
+            var opacity = parseFloat($(".page-read, .page-read-cover").css("opacity")) + parseFloat('0.1');
+            $(".page-read, .page-read-cover").css("opacity",opacity);
+        }
+    });
     $(".read-set-font-opacity").click(function () {
 
     });
