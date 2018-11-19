@@ -44,6 +44,8 @@ class Y2048ScoreBestDB extends ActiveRecord
         if(empty($ar)){
             $ar = new Y2048ScoreBestDB();
             $ar->userid = $userid;
+            $ar->ctime = date("Y-m-d H:i:s");
+            $ar->mtime = date("Y-m-d H:i:s");
         }
         $ar->baseScore = $score;
         return $ar->save();
