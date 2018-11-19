@@ -23,7 +23,7 @@ class Y2048Controller extends Controller
             ->setUrl('https://api.weixin.qq.com/sns/jscode2session')
             ->setData(['appid' => Yii::$app->params['appid'], 'secret' => Yii::$app->params['AppSecret'], 'js_code' => $code, 'grant_type' => 'authorization_code'])
             ->send();
-
+        Yii::$app->response->format='json';
         if($response->statusCode == 200){
             $data = json_decode($response->content, true);
             $openid = isset($data['openid'])?$data['openid']:'';
