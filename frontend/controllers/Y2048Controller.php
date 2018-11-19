@@ -43,11 +43,11 @@ class Y2048Controller extends Controller
         Yii::$app->response->format='json';
         $openid = Yii::$app->request->post('openid');
         $score = Yii::$app->request->post('score');
-        if(!empty($openid) || empty($user = UsersDB::findByOpenid($openid))){
+        if(empty($openid) || empty($user = UsersDB::findByOpenid($openid))){
             return ['用户未登录'];
         }
 
-        $res = Y2048ScoreBestDB::setBestScore($user->userid, $score);
+        $res = Y2048ScoreBestDB::setBestScore($user->id, $score);
         return $res;
     }
 
