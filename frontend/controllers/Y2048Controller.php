@@ -28,7 +28,7 @@ class Y2048Controller extends Controller
 
         if($response->statusCode == 200){
             $data = json_encode($response->content, true);
-            $openid = $data['openid'];
+//            $openid = $data['openid'];
             print_r($data);exit;
         }
 
