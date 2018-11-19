@@ -341,6 +341,7 @@ class Controller extends \yii\base\Controller
         }else{
             echo json_encode ( $data );
         }
+        Yii::app()->end();
     }
 
     /**
@@ -366,6 +367,7 @@ class Controller extends \yii\base\Controller
         }else{
             echo $func."(".json_encode ( $data ).")";
         }
+        Yii::app()->end();
     }
 
     public function echoOk($data=array(),$msg="",$code="00000",$type="json",$exit=true , $httpStatusCode=""){
