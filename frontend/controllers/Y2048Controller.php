@@ -27,7 +27,7 @@ class Y2048Controller extends Controller
             ->send();
 
         if($response->statusCode == 200){
-            $data = \yii\helpers\Json::encode($response->content);
+            $data = json_encode($response->content, true);
             $openid = $data['openid'];
             print_r($data);exit;
         }
