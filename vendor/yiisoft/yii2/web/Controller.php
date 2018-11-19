@@ -31,6 +31,14 @@ class Controller extends \yii\base\Controller
      */
     public $actionParams = [];
 
+    /**
+     * isEncryptId
+     * 是否对所有的id都加密
+     *
+     * @var mixed
+     * @access protected
+     */
+    protected $isEncryptId = true;
 
     /**
      * Renders a view in response to an AJAX request.
@@ -262,4 +270,218 @@ class Controller extends \yii\base\Controller
     {
         return Yii::$app->getResponse()->redirect(Yii::$app->getRequest()->getUrl() . $anchor);
     }
+
+    /**
+     * HTTP Protocol defined status codes
+     * HTTP协议状态码,调用函数时候只需要将$num赋予一个下表中的已知值就直接会返回状态了。
+     * @param int $num
+     */
+    public function httpStatusCode($num) {
+        $http = array (
+            100 => "HTTP/1.1 100 Continue",
+            101 => "HTTP/1.1 101 Switching Protocols",
+            200 => "HTTP/1.1 200 OK",
+            201 => "HTTP/1.1 201 Created",
+            202 => "HTTP/1.1 202 Accepted",
+            203 => "HTTP/1.1 203 Non-Authoritative Information",
+            204 => "HTTP/1.1 204 No Content",
+            205 => "HTTP/1.1 205 Reset Content",
+            206 => "HTTP/1.1 206 Partial Content",
+            300 => "HTTP/1.1 300 Multiple Choices",
+            301 => "HTTP/1.1 301 Moved Permanently",
+            302 => "HTTP/1.1 302 Found",
+            303 => "HTTP/1.1 303 See Other",
+            304 => "HTTP/1.1 304 Not Modified",
+            305 => "HTTP/1.1 305 Use Proxy",
+            307 => "HTTP/1.1 307 Temporary Redirect",
+            400 => "HTTP/1.1 400 Bad Request",
+            401 => "HTTP/1.1 401 Unauthorized",
+            402 => "HTTP/1.1 402 Payment Required",
+            403 => "HTTP/1.1 403 Forbidden",
+            404 => "HTTP/1.1 404 Not Found",
+            405 => "HTTP/1.1 405 Method Not Allowed",
+            406 => "HTTP/1.1 406 Not Acceptable",
+            407 => "HTTP/1.1 407 Proxy Authentication Required",
+            408 => "HTTP/1.1 408 Request Time-out",
+            409 => "HTTP/1.1 409 Conflict",
+            410 => "HTTP/1.1 410 Gone",
+            411 => "HTTP/1.1 411 Length Required",
+            412 => "HTTP/1.1 412 Precondition Failed",
+            413 => "HTTP/1.1 413 Request Entity Too Large",
+            414 => "HTTP/1.1 414 Request-URI Too Large",
+            415 => "HTTP/1.1 415 Unsupported Media Type",
+            416 => "HTTP/1.1 416 Requested range not satisfiable",
+            417 => "HTTP/1.1 417 Expectation Failed",
+            500 => "HTTP/1.1 500 Internal Server Error",
+            501 => "HTTP/1.1 501 Not Implemented",
+            502 => "HTTP/1.1 502 Bad Gateway",
+            503 => "HTTP/1.1 503 Service Unavailable",
+            504 => "HTTP/1.1 504 Gateway Time-out"
+        );
+    }
+    /**
+     * echoJson
+     * 输出json
+     *
+     * @param mixed $data
+     * @access private
+     * @return void
+     */
+    private function echoJson($data=array(),$code="00000",$msg="",$redirect="",$httpStatusCode=""){
+        @ob_clean();
+        //这里用text/html主要是因为ie6不支持application/json
+        empty($httpStatusCode)?header( "Content-type:text/html; charset=utf-8" ) : header ( "Content-type:text/html; charset=utf-8" ,$this->httpStatusCode($httpStatusCode));
+        if(!isset($data['status'])){
+            $res = $data;
+            $res['status']=substr($code,0,1);
+            $res['code']=$code;
+            $res['msg']=$msg;
+            $res['redirect']=$redirect;
+            echo json_encode ( $res );
+        }else{
+            echo json_encode ( $data );
+        }
+    }
+
+    /**
+     * echoJsonp
+     * 输出jsonp
+     *
+     * @param mixed $data
+     * @access private
+     * @return void
+     */
+    private function echoJsonp($data=array(),$code="00000",$msg=""){
+        $func = "jsoncallback";
+        if(isset($_GET['jsoncallback'])){
+            $func = $_GET['jsoncallback'];
+        }
+        header ( "Content-type:application/json; charset=utf-8" );
+        if(!isset($data['status'])){
+            $res = $data;
+            $res['status']=substr($code,0,1);
+            $res['code']=$code;
+            $res['msg']=$msg;
+            echo $func."(".json_encode ( $res ).")";
+        }else{
+            echo $func."(".json_encode ( $data ).")";
+        }
+    }
+
+    public function echoOk($data=array(),$msg="",$code="00000",$type="json",$exit=true , $httpStatusCode=""){
+        return $this->echoOut(array("data"=>$data),$code,$msg,$type,$exit,"",$httpStatusCode);
+    }
+    public function echoErr($data=array(),$msg="",$code="10000",$type="json",$exit=true,$redirect=""){
+        $_data = $data;
+        $_error = isset($data['error'])?$data['error']:array();
+        unset($_data['error']);
+        return $this->echoOut(array("data"=>$_data,"error"=>$_error),$code,$msg,$type,$exit,$redirect);
+    }
+    public function echoExp($data=array(),$msg="系统错误",$code="20000",$type="json",$exit=true){
+        return $this->echoOut(array("data"=>$data),$code,$msg,$type,$exit);
+    }
+
+    /**
+     * echoOut
+     *
+     * @param mixed $data
+     * @param int $status
+     * @param string $msg
+     * @param string $type
+     * @access public
+     * @return void
+     */
+    public function echoOut($data=array(),$code="00000",$msg="",$type="json",$exit=true,$redirect="",$httpStatusCode=""){
+        $data = $this->encryptId($data,true);
+        if($type=="json" || (isset($_REQUEST['apiType']) && $_REQUEST['apiType']=="json")){
+            $this->echoJson($data,$code,$msg,$redirect,$httpStatusCode);
+        }else{
+            $this->echoJsonp($data,$code,$msg,$redirect);
+        }
+        if($exit){
+            $this->computeRunTime();
+            Yii::app()->end();
+        }
+    }
+
+    /**
+     * encryptId
+     *
+     * @param mixed $data
+     * @access public
+     * @return void
+     */
+    public function encryptId($data,$isJson=false)
+    {
+        if(!$this->isEncryptId){
+            return $data;
+        }
+        if(is_array($data)){
+            foreach($data as $k=>$v){
+                if(is_array($v)){
+                    $data[$k]=$this->encryptId($v,$isJson);
+                }elseif(is_string($v)){
+                    if(substr(strtolower($k),-2,2)=="id" && strtolower($k) != 'openid'){
+                        $_tmp = MathUtil::encrypt($v);
+                        if($isJson){
+                            $data[$k]=$_tmp;
+                        }else{
+                            $data["_".$k]=$_tmp;
+                        }
+                    }
+                }
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * computeRunTime
+     * 计算处理时间
+     * @note protected
+     * @return void
+     */
+    protected function computeRunTime()
+    {
+        //如果为最外层的end
+        if ($this->cEndLog && self::$actionCount == 1) {
+            Yii::log ( "request end", CLogger::LEVEL_INFO, __METHOD__ );
+            TimerUtil::stop( 'all' );
+            $timer = TimerUtil::tree();
+            Yii::log( json_encode($timer),  CLogger::LEVEL_INFO );
+
+            if(is_array($timer['timers']['all'])){
+                $runTime = $timer['timers']['all'][0];
+            }else{
+                $runTime = $timer['timers']['all'];
+            }
+            if ($runTime>$this->errorRunTime) {
+                Yii::log('request run too long:'.print_r(TimerUtil::tree(),true), 'error');
+            }else if ($runTime>$this->warnRunTime) {
+                Yii::log('request run too long:'.print_r(TimerUtil::tree(),true), 'long');
+            }
+        }
+        self::$actionCount--;
+    }
+
+    /**
+     * 获取本次请求的ip
+     * @return mixed
+     */
+    protected function getClientIp()
+    {
+        $unknown = 'unknown';
+        /**
+         * 处理多层代理IP的情况
+         */
+        if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] && strcasecmp($_SERVER['HTTP_X_FORWARDED_FOR'], $unknown)){
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }elseif(isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], $unknown)) {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        //if (false !== strpos($ip, ',')) $ip = reset(explode(',', $ip));
+        return $ip;
+    }
+
+
 }

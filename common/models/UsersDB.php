@@ -34,7 +34,7 @@ class UsersDB extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%airticle}}';
+        return '{{%users}}';
     }
 
     /**
