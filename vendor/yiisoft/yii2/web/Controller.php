@@ -328,6 +328,7 @@ class Controller extends \yii\base\Controller
      * @return void
      */
     private function echoJson($data=array(),$code="00000",$msg="",$redirect="",$httpStatusCode=""){
+        Yii::$app->response->format=Response::FORMAT_JSON;
         @ob_clean();
         //这里用text/html主要是因为ie6不支持application/json
         empty($httpStatusCode)?header( "Content-type:text/html; charset=utf-8" ) : header ( "Content-type:text/html; charset=utf-8" ,$this->httpStatusCode($httpStatusCode));
@@ -337,11 +338,10 @@ class Controller extends \yii\base\Controller
             $res['code']=$code;
             $res['msg']=$msg;
             $res['redirect']=$redirect;
-            echo json_encode ( $res );
+            return $res;
         }else{
-            echo json_encode ( $data );
+            return $data;
         }
-        Yii::app()->end();
     }
 
     /**
@@ -367,7 +367,6 @@ class Controller extends \yii\base\Controller
         }else{
             echo $func."(".json_encode ( $data ).")";
         }
-        Yii::app()->end();
     }
 
     public function echoOk($data=array(),$msg="",$code="00000",$type="json",$exit=true , $httpStatusCode=""){
