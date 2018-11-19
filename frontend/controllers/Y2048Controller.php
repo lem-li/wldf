@@ -32,9 +32,9 @@ class Y2048Controller extends Controller
                 $ar->openid = $openid;
                 $ar->save();
             }
-            $this->echoOk($data, '登录成功');
+            return $data;
         }else{
-            $this->echoErr([],'登录失败');
+            return ['登录失败'];
         }
     }
 
