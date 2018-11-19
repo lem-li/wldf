@@ -26,6 +26,7 @@ class Y2048Controller extends Controller
             ->setData(['appid' => Yii::$app->params['appid'], 'secret' => Yii::$app->params['AppSecret'], 'js_code' => $code, 'grant_type' => 'authorization_code'])
             ->send();
 
+        print_r($response->content);exit;
         return $response->content['openid'];
 //        print_r(Yii::$app->params);
 //        return json_decode($response->getContent());
