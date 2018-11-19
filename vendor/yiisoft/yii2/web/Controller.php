@@ -31,6 +31,16 @@ class Controller extends \yii\base\Controller
      */
     public $actionParams = [];
 
+    protected $cStartLog = true;
+    protected $cEndLog = true;
+    /**
+     * actionCount
+     * 为了打耗时用的参数，防止打了很多遍
+     *
+     * @var float
+     * @access protected
+     */
+    private static $actionCount = 0;
     /**
      * isEncryptId
      * 是否对所有的id都加密
@@ -401,7 +411,7 @@ class Controller extends \yii\base\Controller
         }
         if($exit){
             $this->computeRunTime();
-            Yii::app()->end();
+//            Yii::app()->end();
         }
     }
 

@@ -27,12 +27,12 @@ class Y2048Controller extends Controller
         if($response->statusCode == 200){
             $data = json_decode($response->content, true);
             $openid = isset($data['openid'])?$data['openid']:'';
-            if(empty(UsersDB::findByOpenid($openid))){
+            if(!empty($openid) && empty(UsersDB::findByOpenid($openid))){
                 $ar = new UsersDB();
                 $ar->openid = $openid;
                 $ar->save();
             }
-            $this->echoOk($data,'登录成功');
+            $this->echoOk($data, '登录成功');
         }else{
             $this->echoErr([],'登录失败');
         }

@@ -1034,24 +1034,24 @@
     },
     {
         "name": "yiisoft/yii2-debug",
-        "version": "2.0.13",
-        "version_normalized": "2.0.13.0",
+        "version": "2.0.14",
+        "version_normalized": "2.0.14.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-debug.git",
-            "reference": "b37f414959c2fafefb332020b42037cd17c1cb7f"
+            "reference": "dc5a4a8529de1a41dbb037dbabf1f3f93002f21d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/b37f414959c2fafefb332020b42037cd17c1cb7f",
-            "reference": "b37f414959c2fafefb332020b42037cd17c1cb7f",
+            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/dc5a4a8529de1a41dbb037dbabf1f3f93002f21d",
+            "reference": "dc5a4a8529de1a41dbb037dbabf1f3f93002f21d",
             "shasum": ""
         },
         "require": {
             "yiisoft/yii2": "~2.0.13",
             "yiisoft/yii2-bootstrap": "~2.0.0"
         },
-        "time": "2017-12-05T07:36:23+00:00",
+        "time": "2018-09-23T21:41:04+00:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -1061,7 +1061,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "yii\\debug\\": ""
+                "yii\\debug\\": "src"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
