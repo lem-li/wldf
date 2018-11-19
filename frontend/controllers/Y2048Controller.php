@@ -26,7 +26,7 @@ class Y2048Controller extends Controller
 
         if($response->statusCode == 200){
             $data = json_decode($response->content, true);
-            $openid = isset($data['openid'])?$data['opend']:'';
+            $openid = isset($data['openid'])?$data['openid']:'';
             if(empty(UsersDB::findByOpenid($openid))){
                 $ar = new UsersDB();
                 $ar->openid = $openid;
