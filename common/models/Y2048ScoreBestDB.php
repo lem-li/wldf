@@ -14,14 +14,14 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 
-class UsersDB extends ActiveRecord
+class Y2048ScoreBestDB extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%users}}';
+        return '{{%y2048_score_best}}';
     }
 
     /**
@@ -32,9 +32,21 @@ class UsersDB extends ActiveRecord
         return static::findOne(['id' => $id]);
     }
 
-    public static function findByOpenid($openid)
+    public static function findByUid($userid)
     {
-        return static::findOne(['openid' => $openid]);
+        return static::findOne(['userid' => $userid]);
+    }
+
+    public static function setBestScore($userid, $score)
+    {
+        if(empty($userid || $score)) return ;
+        $ar = self::findByUid($userid);
+        if(empty($ar)){
+            $ar = new Y2048ScoreBestDB();
+            $ar->userid = $userid;
+        }
+        $ar->baseScore = $score;
+        return $ar->save();
     }
 
     /**
