@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "miffy/miffyzq": "1.0.12",
         "yiisoft/yii2-httpclient": "^2.0",
-        "yiisoft/yii2-debug": "^2.0"
+        "yiisoft/yii2-debug": "^2.0",
+        "jtcczu/yii2-applet": "^1.1"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

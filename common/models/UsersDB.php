@@ -37,6 +37,35 @@ class UsersDB extends ActiveRecord
         return static::findOne(['openid' => $openid]);
     }
 
+
+    public static function updateUserByOpenid($openid , $data){
+        $ar = static::findOne(['openid' => $openid]);
+        if(empty($ar)){
+            $ar = new UsersDB();
+            $ar->openid = $openid;
+            $ar->ctime = date("Y-m-d H:i:s");
+        }
+        if($ar->nickName != $data['nickName']){
+            $ar->nickName = $data['nickName'];
+        }
+        if($ar->gender != $data['gender']){
+            $ar->gender = $data['gender'];
+        }
+        if($ar->city != $data['city']){
+            $ar->city = $data['city'];
+        }
+        if($ar->province != $data['province']){
+            $ar->province = $data['province'];
+        }
+        if($ar->country != $data['country']){
+            $ar->country = $data['country'];
+        }
+        if($ar->photo != $data['avatarUrl']){
+            $ar->photo = $data['avatarUrl'];
+        }
+        return $ar->save() ? true : false;
+    }
+
     /**
      * @inheritdoc
      */
@@ -44,4 +73,5 @@ class UsersDB extends ActiveRecord
     {
         return $this->getPrimaryKey();
     }
+
 }
